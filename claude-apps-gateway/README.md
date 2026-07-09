@@ -1,12 +1,12 @@
-# Claude Apps Gateway — SA Field Guide
+# Claude Apps Gateway
 
 ## TL;DR
 
-Claude apps gateway is how enterprises run Claude Code on AWS without putting AWS credentials on every developer machine. It's a proxy that sits in the customer's AWS account, authenticates developers via corporate SSO, and routes all inference to Amazon Bedrock or Claude Platform on AWS using a single IAM role. No per-seat fee. Developers just run `claude /login` and they're in.
+Claude apps gateway is how enterprises run Claude Code (and Claude Desktop) on AWS without putting AWS credentials on every developer machine. It's a proxy that sits in the customer's AWS account, authenticates developers via corporate SSO, and routes all inference to Amazon Bedrock or Claude Platform on AWS using a single IAM role. No per-seat fee. Developers just run `claude /login` and they're in.
 
 ---
 
-## The 30-second pitch for customers
+## The 30-second pitch
 
 > "You deploy one container in your VPC. It connects to your IdP and to Amazon Bedrock or Claude Platform on AWS. Your developers sign in with corporate SSO — no AWS credentials, no API keys on their machines. You get per-user cost attribution, model access policies by team, and usage telemetry to your own collector. Offboarding is just removing someone from the IdP."
 
@@ -386,7 +386,7 @@ No license fee. Approximately $37/month for minimal AWS infrastructure (ECS $9 +
 No. Gateway requires browser SSO. Configure CI against Amazon Bedrock directly with IAM credentials.
 
 **Q: What about Claude Desktop / Cowork?**
-The gateway is for Claude Code only. Claude Desktop on Amazon Bedrock has its own MDM configuration path.
+Claude Desktop (including Chat, Cowork, and Claude Code) can route through the gateway. Configure the gateway URL in the desktop app's managed settings via MDM.
 
 **Q: Can they fail over between regions?**
 Yes. Configure multiple upstreams with different regions. The gateway tries them in order and fails over on 5xx/429.
